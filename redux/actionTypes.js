@@ -1,0 +1,1 @@
+export const VIDEO_CLICKED = 'VIDEO_CLICKED';
