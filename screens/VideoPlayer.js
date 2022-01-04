@@ -26,12 +26,14 @@ import {
   faThumbsUp,
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import Video from 'react-native-video';
 
 import {useTheme} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 
 function VideoPlayer({navigation}) {
   const [likes, setLikes] = useState(0);
+  const [dislikes, setDisLikes] = useState(0);
   const videoGotFromRedux = useSelector(state => state.VIDEO);
 
   const {colors} = useTheme();
@@ -48,14 +50,19 @@ function VideoPlayer({navigation}) {
     <ScrollView>
       <View style={{flex: 1}}>
         {/* Video player */}
-        <View style={{width: '100%', height: 200, backgroundColor: 'black'}}>
-          {/* <FontAwesomeIcon
-            icon={faArrowLeft}
-            size={24}
-            color="grey"
-            onPress={() => navigation.navigate('Home')}
-          /> */}
-          <WebView
+        <View style={{width: '100%', height: 200}}>
+          <Video
+            style={styles.backgroundVideo}
+            controls={true}
+            muted={false}
+            source={{
+              uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+              //uri: videoGotFromRedux.videoUrl,
+            }}
+          />
+        </View>
+
+        {/* <WebView
             style={{flex: 1}}
             javaScriptEnabled={true}
             domStorageEnabled={true}
@@ -65,8 +72,7 @@ function VideoPlayer({navigation}) {
               // uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
               uri: videoGotFromRedux.videoUrl,
             }}
-          />
-        </View>
+          /> */}
 
         {/* Video info  */}
         <View style={{flex: 1}}>
@@ -95,8 +101,13 @@ function VideoPlayer({navigation}) {
             </View>
 
             <View style={styles.actionListItem}>
-              <FontAwesomeIcon icon={faThumbsDown} size={20} color="grey" />
-              <Text style={{color: textcolor}}>Dislikes</Text>
+              <FontAwesomeIcon
+                icon={faThumbsDown}
+                size={20}
+                color="grey"
+                onPress={() => setDisLikes(dislikes + 1)}
+              />
+              <Text style={{color: textcolor}}>{dislikes} Dislikes</Text>
             </View>
 
             <View style={styles.actionListItem}>
@@ -142,7 +153,7 @@ function VideoPlayer({navigation}) {
               {video.user.name}
             </Text>
             <Text style={{color: 'grey', fontSize: 18}}>
-              {video.user.subscribers} subscribers
+              {video.user.subscribers} Subscribers
             </Text>
           </View>
           <Text
@@ -180,6 +191,7 @@ function VideoPlayer({navigation}) {
             </Text>
           </View>
         </Pressable>
+
         {/* Recommended Video  */}
         <SafeAreaView>
           <FlatList
@@ -235,5 +247,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
+  },
+  backgroundVideo: {
+    flex: 1,
+
+    //aspectRatio: 16 / 9,
   },
 });
