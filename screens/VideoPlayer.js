@@ -15,7 +15,7 @@ import {WebView} from 'react-native-webview';
 import videos from '../assests/data/videos.json';
 import VideoListItem from '../components/VideoListItem';
 import video from '../assests/data/video.json';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -34,6 +34,12 @@ import {useSelector} from 'react-redux';
 function VideoPlayer({navigation}) {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDisLikes] = useState(0);
+
+  const [toggle, setToggle] = useState(true);
+  const toggleFunction = () => {
+    setToggle(!toggle);
+  };
+
   const videoGotFromRedux = useSelector(state => state.VIDEO);
 
   const {colors} = useTheme();
@@ -156,15 +162,29 @@ function VideoPlayer({navigation}) {
               {video.user.subscribers} Subscribers
             </Text>
           </View>
-          <Text
-            style={{
-              color: 'red',
-              fontSize: 20,
-              paddingRight: 8,
-              fontWeight: 'bold',
-            }}>
-            SUBSCRIBE
-          </Text>
+          <TouchableOpacity onPress={() => toggleFunction()}>
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 20,
+                paddingRight: 8,
+                fontWeight: 'bold',
+              }}>
+              {toggle ? (
+                'SUBSCRIBE'
+              ) : (
+                <Text
+                  style={{
+                    color: 'grey',
+                    fontSize: 20,
+                    paddingRight: 8,
+                    fontWeight: 'bold',
+                  }}>
+                  UNSUBSCRIBE{' '}
+                </Text>
+              )}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {/*  Comments*/}
@@ -218,7 +238,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   title: {
-    // color: 'black',
     fontSize: 20,
     fontWeight: '500',
     marginVertical: 5,
@@ -250,7 +269,5 @@ const styles = StyleSheet.create({
   },
   backgroundVideo: {
     flex: 1,
-
-    //aspectRatio: 16 / 9,
   },
 });

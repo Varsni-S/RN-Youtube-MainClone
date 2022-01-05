@@ -118,9 +118,6 @@ export default function App() {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="RootHome" component={RootHome} />
           <Stack.Screen name="Search" component={Search} />
-          {/* <Stack.Screen name="Explore" component={Explore} /> */}
-          {/* <Stack.Screen name="Home" component={Home} /> */}
-
           <Stack.Screen name="VideoPlayer" component={VideoPlayer} />
         </Stack.Navigator>
       </NavigationContainer>
