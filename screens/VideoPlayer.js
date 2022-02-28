@@ -128,7 +128,7 @@ function VideoPlayer({navigation}) {
 
             <View style={styles.actionListItem}>
               <FontAwesomeIcon icon={faSave} size={20} color="grey" />
-              <Text style={{color: textcolor}}>Save</Text>
+              <Text style={{color: textcolor}}>Clip</Text>
             </View>
 
             <View style={styles.actionListItem}>
