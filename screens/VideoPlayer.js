@@ -180,7 +180,7 @@ function VideoPlayer({navigation}) {
                     paddingRight: 8,
                     fontWeight: 'bold',
                   }}>
-                  UNSUBSCRIBE{' '}
+                  SUBSCRIBED{' '}
                 </Text>
               )}
             </Text>
