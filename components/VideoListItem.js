@@ -4,21 +4,24 @@ import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faEllipsisV} from '@fortawesome/free-solid-svg-icons';
 import {useTheme} from '@react-navigation/native';
-import {videoClickedAction} from '../redux/action';
+import {videoClickedAction} from '../assests/redux/action';
 import {useDispatch} from 'react-redux';
 
 const VideoListItem = ({video, navigation}) => {
   const dispatch = useDispatch();
   const {colors} = useTheme();
+
   const textcolor = colors.iconColor;
   const minutes = Math.floor(video.duration / 60);
   const seconds = video.duration % 60;
+
   let viewsString = video.views.toString();
   if (video.views > 1_000_000) {
     viewsString = (video.views / 1_000_000).toFixed(1) + 'M';
   } else if (video.views > 1_000) {
     viewsString = (video.views / 1_000).toFixed(1) + 'K';
   }
+
   const videoPressFunction = () => {
     navigation.navigate('VideoPlayer');
     dispatch(videoClickedAction(video));
@@ -61,8 +64,8 @@ const VideoListItem = ({video, navigation}) => {
             {video.user.name} {viewsString} {video.createdAt}
           </Text>
         </View>
-        {/* Menu icon*/}
 
+        {/* Menu icon*/}
         <FontAwesomeIcon icon={faEllipsisV} size={16} color="grey" />
       </View>
     </TouchableOpacity>
