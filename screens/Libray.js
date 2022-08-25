@@ -6,7 +6,7 @@ export default function Libray() {
   return (
     <View>
       <Header />
-      <Text>Library Page</Text>
+      <Text>Library Psage</Text>
     </View>
   );
 }
